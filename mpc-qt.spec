@@ -6,6 +6,8 @@ License:        GPLv2+
 Group:          Video/Players
 Url:            https://github.com/mpc-qt/mpc-qt
 Source0:        https://github.com/mpc-qt/mpc-qt/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+
+BuildRequires:  qmake5
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(Qt5Gui)
@@ -13,7 +15,7 @@ BuildRequires:  pkgconfig(Qt5Help)
 BuildRequires:  pkgconfig(Qt5Network)
 BuildRequires:  pkgconfig(Qt5Widgets)
 BuildRequires:  pkgconfig(Qt5X11Extras)
-BuildRequires:  pkgconfig(mpv) >= 0.35
+BuildRequires:  pkgconfig(mpv)
 
 %description
 A clone of Media Player Classic reimplemented in Qt.
