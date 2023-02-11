@@ -39,7 +39,7 @@ rm -rf mpv-dev
 %doc README.md DOCS/ipc.md
 %license LICENSE
 %{_bindir}/%{name}
-%{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/io.github.mpc_qt.Mpc-Qt.desktop
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/translations
 %{_datadir}/%{name}/translations/%{name}_*.qm
