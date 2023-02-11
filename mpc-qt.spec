@@ -1,7 +1,7 @@
 %define _empty_manifest_terminate_build 0
 
 Name:           mpc-qt
-Version:        22.02
+Version:        23.02
 Release:        1
 Summary:        Media Player Classic Qute Theater
 License:        GPLv2+
