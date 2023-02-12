@@ -43,4 +43,5 @@ rm -rf mpv-dev
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/translations
 %{_datadir}/%{name}/translations/%{name}_*.qm
+%{_datadir}/metainfo/io.github.mpc_qt.Mpc-Qt.appdata.xml
 %{_iconsdir}/hicolor/scalable/*/%{name}.svg
