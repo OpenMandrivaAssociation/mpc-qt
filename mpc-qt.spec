@@ -2,7 +2,7 @@
 
 Name:           mpc-qt
 Version:        23.02
-Release:        1
+Release:        2
 Summary:        Media Player Classic Qute Theater
 License:        GPLv2+
 Group:          Video/Players
