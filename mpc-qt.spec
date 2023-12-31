@@ -1,23 +1,27 @@
 %define _empty_manifest_terminate_build 0
 
 Name:           mpc-qt
-Version:        23.02
-Release:        2
+Version:        23.12
+Release:        1
 Summary:        Media Player Classic Qute Theater
 License:        GPLv2+
 Group:          Video/Players
 Url:            https://github.com/mpc-qt/mpc-qt
 Source0:        https://github.com/mpc-qt/mpc-qt/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-BuildRequires:  qmake5
-BuildRequires:  qt5-linguist-tools
-BuildRequires:  pkgconfig(Qt5Core)
-BuildRequires:  pkgconfig(Qt5DBus)
-BuildRequires:  pkgconfig(Qt5Gui)
-BuildRequires:  pkgconfig(Qt5Help)
-BuildRequires:  pkgconfig(Qt5Network)
-BuildRequires:  pkgconfig(Qt5Widgets)
-BuildRequires:  pkgconfig(Qt5X11Extras)
+BuildRequires:	cmake
+BuildRequires:	cmake(Qt6)
+BuildRequires:	qmake-qt6
+BuildRequires:  cmake(Qt6DBus)
+BuildRequires:	cmake(Qt6LinguistTools)
+BuildRequires:	cmake(Qt6Core)
+BuildRequires:  cmake(Qt6Gui)
+BuildRequires:  cmake(Qt6Svg)
+BuildRequires:  cmake(Qt6Help)
+BuildRequires:  cmake(Qt6Network)
+BuildRequires:	cmake(Qt6Widgets)
+BuildRequires:	qt6-qtbase-theme-gtk3
+
 BuildRequires:  pkgconfig(mpv)
 
 %description
@@ -29,7 +33,7 @@ A clone of Media Player Classic reimplemented in Qt.
 rm -rf mpv-dev
 
 %build
-%qmake_qt5 MPCQT_VERSION=%{version} PREFIX=%{_prefix}
+qmake-qt6 MPCQT_VERSION=%{version} PREFIX=%{_prefix}
 %make_build
 
 %install
