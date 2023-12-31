@@ -44,9 +44,9 @@ qmake-qt6 MPCQT_VERSION=%{version} PREFIX=%{_prefix}
 %doc README.md DOCS/ipc.md
 %license LICENSE
 %{_bindir}/%{name}
-%{_datadir}/applications/io.github.mpc_qt.Mpc-Qt.desktop
-%dir %{_datadir}/%{name}
-%dir %{_datadir}/%{name}/translations
-%{_datadir}/%{name}/translations/%{name}_*.qm
-%{_datadir}/metainfo/io.github.mpc_qt.Mpc-Qt.appdata.xml
+#{_datadir}/applications/io.github.mpc_qt.Mpc-Qt.desktop
+#dir %{_datadir}/%{name}
+#dir %{_datadir}/%{name}/translations
+#{_datadir}/%{name}/translations/%{name}_*.qm
+#{_datadir}/metainfo/io.github.mpc_qt.Mpc-Qt.appdata.xml
 %{_iconsdir}/hicolor/scalable/*/%{name}.svg
