@@ -1,13 +1,16 @@
-%define _empty_manifest_terminate_build 0
+# qmake doesn't support debugsource detection
+%undefine _debugsource_packages
 
 Name:           mpc-qt
+
 Version:        24.06
-Release:        1
+Release:        2
 Summary:        Media Player Classic Qute Theater
 License:        GPLv2+
 Group:          Video/Players
 Url:            https://github.com/mpc-qt/mpc-qt
 Source0:        https://github.com/mpc-qt/mpc-qt/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Patch0:		mpc-qt-24.06-bogus-workaround-for-crash-on-video-playback.patch
 
 BuildRequires:	cmake
 BuildRequires:	cmake(Qt6)
@@ -30,8 +33,7 @@ BuildRequires:  pkgconfig(mpv)
 A clone of Media Player Classic reimplemented in Qt.
 
 %prep
-%setup -q -n %{name}-%{version}
-
+%autosetup -p1
 rm -rf mpv-dev
 
 %build

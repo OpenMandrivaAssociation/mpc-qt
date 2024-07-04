@@ -1,0 +1,49 @@
+diff -up mpc-qt-24.06/mpvwidget.cpp.omv~ mpc-qt-24.06/mpvwidget.cpp
+--- mpc-qt-24.06/mpvwidget.cpp.omv~	2024-07-04 23:10:28.355450189 +0200
++++ mpc-qt-24.06/mpvwidget.cpp	2024-07-04 23:40:53.964095540 +0200
+@@ -41,6 +41,8 @@
+     } \
+ }
+ 
++static int refreshCount = 0;
++
+ MpvObject::PropertyDispatchMap MpvObject::propertyDispatch = {
+     HANDLE_PROP("time-pos", self_playTimeChanged, toDouble, -1.0),
+     HANDLE_PROP("duration", self_playLengthChanged, toDouble, -1.0),
+@@ -922,6 +924,7 @@ void MpvGlWidget::initializeGL()
+     }
+ 
+     render = ctrl->createRenderContext(params);
++    refreshCount = 0;
+     mpv_render_context_set_update_callback(render, MpvGlWidget::render_update, this);
+ }
+ 
+@@ -935,13 +938,21 @@ void MpvGlWidget::paintGL()
+         return;
+     }
+ 
+-    bool yes = true;
+-    mpv_opengl_fbo fbo { static_cast<int>(defaultFramebufferObject()), glWidth, glHeight, 0 };
+-    mpv_render_param params[] {
+-        {MPV_RENDER_PARAM_OPENGL_FBO, &fbo },
+-        {MPV_RENDER_PARAM_FLIP_Y, &yes}
+-    };
+-    mpv_render_context_render(render, params);
++    // FIXME this is a pretty bad workaround for a crash -- looks like we
++    // need to give mpv enough time to initialize (seems to happen on another
++    // thread). We get a crash in mpv_render_context_render in the first
++    // couple of frames (6 frames on a sample video on a Ryzen 9, so let's
++    // skip a few more requests just in case initialization is slower on
++    // other hardware).
++    if(++refreshCount > 10) {
++        bool yes = true;
++        mpv_opengl_fbo fbo { static_cast<int>(defaultFramebufferObject()), glWidth, glHeight, 0 };
++        mpv_render_param params[] {
++            {MPV_RENDER_PARAM_OPENGL_FBO, &fbo },
++            {MPV_RENDER_PARAM_FLIP_Y, &yes}
++        };
++        mpv_render_context_render(render, params);
++    }
+ }
+ 
+ void MpvGlWidget::resizeGL(int w, int h)
